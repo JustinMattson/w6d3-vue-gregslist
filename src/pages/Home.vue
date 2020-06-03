@@ -11,23 +11,26 @@
       <a class="nav-link" :class="{active: activeTab=='jobs'}" @click="activeTab = 'jobs'">Jobs</a>
     </nav>
     <cars v-if="activeTab == 'cars'" />
-    <div v-else-if="activeTab == 'houses'">Houses</div>
+    <houses v-else-if="activeTab == 'houses'" />
     <div v-else>JOBS</div>
   </div>
 </template>
 
 
 <script>
-import Cars from "@/components/CarsComponent.vue"
+import Cars from "@/components/CarsComponent.vue";
+import Houses from "@/components/HousesComponent.vue";
 export default {
-  name: 'Home',
+  name: "Home",
   data() {
     return {
-      activeTab: 'cars'
-    }
+      activeTab: "cars",
+      activeTab: "houses"
+    };
   },
   components: {
-    Cars
+    Cars,
+    Houses
   }
-}
+};
 </script>

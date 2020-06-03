@@ -1,30 +1,38 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import VueRouter from "vue-router";
 // @ts-ignore
-import Home from '../pages/Home.vue'
+import Home from "../pages/Home.vue";
 // @ts-ignore
-import CarDetails from '../pages/CarDetailsPage.vue'
+import CarDetails from "../pages/CarDetailsPage.vue";
+// @ts-ignore
+import HouseDetails from "../pages/HouseDetailsPage.vue";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: "/",
+    name: "Home",
+    component: Home,
   },
   {
-    path: '/cars/:id',
-    name: 'CarDetails',
-    component: CarDetails
-  }, {
+    path: "/cars/:id",
+    name: "CarDetails",
+    component: CarDetails,
+  },
+  {
+    path: "/houses/:id",
+    name: "HouseDetails",
+    component: HouseDetails,
+  },
+  {
     path: "*",
-    redirect: "/"
-  }
-]
+    redirect: "/",
+  },
+];
 
 const router = new VueRouter({
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
