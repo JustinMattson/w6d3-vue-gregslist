@@ -1,5 +1,5 @@
 import Vue from "vue";
-import Vuex from "vuex";
+import Vuex, { Store } from "vuex";
 import axios from "axios";
 import router from "../router";
 
@@ -15,6 +15,8 @@ export default new Vuex.Store({
     activeCar: {},
     houses: [],
     activeHouse: {},
+    jobs: [],
+    activeJob: {},
   },
   mutations: {
     setAllCars(state, cars) {
@@ -23,17 +25,26 @@ export default new Vuex.Store({
     setAllHouses(state, houses) {
       state.houses = houses;
     },
+    setAllJobs(state, jobs) {
+      state.jobs = jobs;
+    },
     setActiveCar(state, car) {
       state.activeCar = car;
     },
     setActiveHouse(state, house) {
       state.activeHouse = house;
     },
+    setActiveJob(state, job) {
+      state.activeJob = job;
+    },
     addToCars(state, car) {
       state.cars.push(car);
     },
     addToHouses(state, house) {
       state.houses.push(house);
+    },
+    addToJobs(state, job) {
+      state.jobs.push(job);
     },
   },
   actions: {
@@ -53,6 +64,14 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
+    async getAllJobs({ commit }) {
+      try {
+        let res = await _api.get("jobs");
+        commit("setAllJobs", res.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
     async getCarDetails({ commit }, id) {
       try {
         let res = await _api.get("cars/" + id);
@@ -65,6 +84,14 @@ export default new Vuex.Store({
       try {
         let res = await _api.get("houses/" + id);
         commit("setActiveHouse", res.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async getJobDetails({ commit }, id) {
+      try {
+        let res = await _api.get("jobs/" + id);
+        commit("setActiveJob", res.data.data);
       } catch (error) {
         console.error(error);
       }
@@ -90,6 +117,18 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
+    async createJob({ commit, dispatch }, jobDetails) {
+      try {
+        let res = await _api.post("jobs", jobDetails);
+        commit("jobs", res.data.data);
+        router.push({
+          name: "JobDetails",
+          params: { id: res.data.data._id },
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    },
     async deleteCar({ commit, dispatch }, id) {
       try {
         let res = await _api.delete("cars/" + id);
@@ -102,6 +141,14 @@ export default new Vuex.Store({
     async deleteHouse({ commit, dispatch }, id) {
       try {
         let res = await _api.delete("houses/" + id);
+        router.push({ name: "Home" });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async deleteJob({ commit, dispatch }, id) {
+      try {
+        let res = await _api.delete("jobs/" + id);
         router.push({ name: "Home" });
       } catch (error) {
         console.error(error);

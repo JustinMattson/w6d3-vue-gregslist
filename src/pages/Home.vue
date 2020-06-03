@@ -12,7 +12,7 @@
     </nav>
     <cars v-if="activeTab == 'cars'" />
     <houses v-else-if="activeTab == 'houses'" />
-    <div v-else>JOBS</div>
+    <jobs v-else-if="activeTab == 'jobs'" />
   </div>
 </template>
 
@@ -20,17 +20,20 @@
 <script>
 import Cars from "@/components/CarsComponent.vue";
 import Houses from "@/components/HousesComponent.vue";
+import Jobs from "@/components/JobsComponent.vue";
 export default {
   name: "Home",
   data() {
     return {
       activeTab: "cars",
-      activeTab: "houses"
+      activeTab: "houses",
+      activeTab: "jobs"
     };
   },
   components: {
     Cars,
-    Houses
+    Houses,
+    Jobs
   }
 };
 </script>

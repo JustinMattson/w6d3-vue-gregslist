@@ -6,6 +6,8 @@ import Home from "../pages/Home.vue";
 import CarDetails from "../pages/CarDetailsPage.vue";
 // @ts-ignore
 import HouseDetails from "../pages/HouseDetailsPage.vue";
+// @ts-ignore
+import JobDetails from "../pages/JobDetailsPage.vue";
 
 Vue.use(VueRouter);
 
@@ -24,6 +26,11 @@ const routes = [
     path: "/houses/:id",
     name: "HouseDetails",
     component: HouseDetails,
+  },
+  {
+    path: "/jobs/:id",
+    name: "JobDetails",
+    component: JobDetails,
   },
   {
     path: "*",
